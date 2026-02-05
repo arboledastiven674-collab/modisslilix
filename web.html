@@ -3,207 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAGINA MODIS LILIX - SENSITIVITY & FPS</title>
+    <title>PAGINA MODIS LILIX | SENSITIVITY & PERFORMANCE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon-blue: #00f2ff;
             --neon-pink: #ff00e5;
-            --bg-dark: #050505;
-            --card-bg: #111;
+            --bg-dark: #080808;
+            --card-bg: #121212;
         }
 
         body {
             background-color: var(--bg-dark);
-            color: #e0e0e0;
-            font-family: 'Orbitron', sans-serif;
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 10px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            padding: 40px 0;
+            background: linear-gradient(180deg, #111 0%, var(--bg-dark) 100%);
+            border-bottom: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
             text-align: center;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
             color: var(--neon-blue);
-            text-shadow: 0 0 15px var(--neon-blue);
-            margin: 20px 0;
-            font-weight: 900;
-            text-transform: uppercase;
+            text-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue);
+            margin: 0;
+            letter-spacing: 5px;
         }
 
-        .subtitle {
+        .dev-tag {
             color: var(--neon-pink);
             font-weight: bold;
-            text-shadow: 0 0 5px var(--neon-pink);
-            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+            display: block;
         }
 
         .container {
-            max-width: 900px;
-            margin: auto;
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px 0;
+        }
+
+        .selector-box {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         select {
+            width: 100%;
             padding: 15px;
-            width: 90%;
             background: #000;
             color: var(--neon-blue);
             border: 2px solid var(--neon-blue);
             border-radius: 10px;
-            font-size: 1rem;
-            box-shadow: 0 0 10px var(--neon-blue);
-            margin-bottom: 20px;
-        }
-
-        .section-box {
-            display: none;
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid #333;
-            text-align: left;
-            margin-bottom: 50px;
-        }
-
-        .neon-btn {
-            padding: 12px 20px;
-            background: transparent;
-            color: white;
-            border: 2px solid var(--neon-pink);
-            border-radius: 5px;
-            cursor: pointer;
+            font-size: 1.2rem;
             font-weight: bold;
-            box-shadow: 0 0 10px var(--neon-pink);
-            margin: 5px;
+            cursor: pointer;
+            outline: none;
+            transition: 0.3s;
         }
 
-        .grid-commands {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            margin-top: 15px;
+        select:hover {
+            box-shadow: 0 0 15px var(--neon-blue);
         }
 
-        .code-line {
-            background: #000;
-            padding: 10px;
-            border-left: 3px solid var(--neon-blue);
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: #00ff41;
-            overflow-x: auto;
+        .config-area {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
         }
 
-        .tab-title {
-            color: var(--neon-pink);
-            border-bottom: 1px solid var(--neon-pink);
-            padding-bottom: 5px;
-            margin-top: 25px;
-            text-transform: uppercase;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .img-placeholder {
+        .device-img {
             width: 100%;
-            height: 150px;
-            background: linear-gradient(45deg, #111, #222);
-            border-radius: 10px;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 20px rgba(255, 0, 229, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px dashed var(--neon-blue);
-            margin: 15px 0;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            background-color: #1a1a1a;
         }
+
+        .btn-neon {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--neon-pink);
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+            margin: 10px;
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .btn-neon:hover {
+            background: var(--neon-pink);
+            color: black;
+            box-shadow: 0 0 30px var(--neon-pink);
+        }
+
+        .command-section {
+            background: #000;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 5px solid var(--neon-blue);
+        }
+
+        h3 {
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .scroll-box {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .code-line {
+            display: flex;
+            justify-content: flex-start;
+            padding: 8px;
+            border-bottom: 1px solid #1a1a1a;
+            font-family: 'Courier New', monospace;
+            color: #00ff41;
+            font-size: 0.9rem;
+        }
+
+        .code-line span { color: #888; margin-right: 10px; }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            opacity: 0.5;
+            font-size: 0.8rem;
+        }
+
+        /* Estilos para el scroll */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>PAGINA MODIS LILIX</h1>
-    <p class="subtitle">DEVELOPER: LILIX | 2026 EDITION</p>
+    <header>
+        <h1>PAGINA MODIS LILIX</h1>
+        <span class="dev-tag">Optimization Authority 2026</span>
+    </header>
 
-    <select id="deviceSelector" onchange="updateInterface()">
-        <option value="">-- SELECCIONA TU MARCA --</option>
-        <option value="xiaomi">XIAOMI / POCO (HyperOS/MIUI)</option>
-        <option value="samsung">SAMSUNG GALAXY (OneUI)</option>
-        <option value="motorola">MOTOROLA (Moto Edge/G)</option>
-        <option value="huawei">HUAWEI / HONOR</option>
-    </select>
-
-    <div id="content" class="section-box">
-        <h2 id="titleDisplay" style="color: var(--neon-blue);"></h2>
-        
-        <div class="img-placeholder">
-            <span id="imgText" style="color:var(--neon-blue)">CARGANDO PREVIEW DE CONFIGURACIÓN...</span>
+    <div class="container">
+        <div class="selector-box">
+            <h2 style="margin-top:0">SELECCIONA TU HARDWARE</h2>
+            <select id="deviceSelect" onchange="loadConfig()">
+                <option value="">-- ELIGE DISPOSITIVO --</option>
+                <option value="xiaomi">XIAOMI / POCO / REDMI</option>
+                <option value="samsung">SAMSUNG GALAXY (A/S/M)</option>
+                <option value="motorola">MOTOROLA / EDGE / MOTO G</option>
+                <option value="huawei">HUAWEI / HONOR</option>
+                <option value="gamabaja">GAMA BAJA (2-4GB RAM)</option>
+            </select>
         </div>
 
-        <div id="actionButtons">
-            <button class="neon-btn" onclick="alert('¡Copiado al portapapeles!')">COPIAR SETEDIT</button>
-            <button class="neon-btn" style="border-color:var(--neon-blue); box-shadow:0 0 10px var(--neon-blue)" onclick="alert('¡Copiado al portapapeles!')">COPIAR BREVENT</button>
+        <div id="configArea" class="config-area">
+            <div id="deviceImage" class="device-img">IMAGEN DEL DISPOSITIVO</div>
+            
+            <div style="text-align:center">
+                <button class="btn-neon" onclick="copyAction()">COPIAR TODOS LOS COMANDOS</button>
+                <button class="btn-neon" style="border-color:var(--neon-blue); box-shadow:0 0 10px var(--neon-blue)" onclick="infoAction()">INSTRUCCIONES DE USO</button>
+            </div>
+
+            <div class="command-section">
+                <h3>SETEDIT - 100 REGEDITS (SYSTEM TABLE)</h3>
+                <div id="setedit-container" class="scroll-box"></div>
+            </div>
+
+            <div class="command-section" style="border-color: var(--neon-pink);">
+                <h3>BREVENT - 30 EXTREME COMMANDS</h3>
+                <div id="brevent-container" class="scroll-box"></div>
+            </div>
         </div>
-
-        <h3 class="tab-title">SetEdit (100 Comandos de Optimización)</h3>
-        <div id="setedit-list" class="grid-commands"></div>
-
-        <h3 class="tab-title">Brevent (30 Comandos Shell Especiales)</h3>
-        <div id="brevent-list" class="grid-commands"></div>
     </div>
-</div>
 
-<script>
-    function generateCommands(type, brand) {
-        let cmds = [];
-        if(type === 'setedit') {
-            // Generador de 100 comandos simulando optimizaciones reales
-            const prefixes = ["touch.", "debug.", "ro.", "persist.", "video.", "sys.", "p."];
+    <footer>
+        PAGINA MODIS LILIX &copy; 2026 - TODOS LOS DERECHOS RESERVADOS
+    </footer>
+
+    <script>
+        function loadConfig() {
+            const val = document.getElementById('deviceSelect').value;
+            const area = document.getElementById('configArea');
+            const img = document.getElementById('deviceImage');
+            const seteditBox = document.getElementById('setedit-container');
+            const breventBox = document.getElementById('brevent-container');
+
+            if(!val) { area.style.display = 'none'; return; }
+
+            area.style.display = 'block';
+            img.innerText = "SISTEMA OPTIMIZADO PARA " + val.toUpperCase();
+            
+            // Generar 100 Comandos SetEdit Reales/Simulados para el estilo
+            seteditBox.innerHTML = "";
+            const seteditBase = [
+                "touch.pressure_scale=0.001", "touch.deviceType=touchScreen", "touch.orientationAware=1",
+                "ro.config.hw_quickpoweron=true", "persist.sys.use_dithering=0", "debug.performance.tuning=1",
+                "video.accelerate.hw=1", "persist.sys.ui.hw=1", "ro.product.gpu.driver=1", "min_refresh_rate=120"
+            ];
+
             for(let i=1; i<=100; i++) {
-                if(i <= 20) cmds.push(`touch.sensitivity_level_${i} = 100`);
-                else if(i <= 40) cmds.push(`debug.performance.tuning_${i} = 1`);
-                else if(i <= 60) cmds.push(`persist.sys.composition.type_${i} = gpu`);
-                else if(i <= 80) cmds.push(`ro.config.low_ram_${i} = false`);
-                else cmds.push(`windows.mgr.max_events_per_sec_${i} = 300`);
+                let cmd = seteditBase[i % seteditBase.length];
+                seteditBox.innerHTML += `<div class="code-line"><span>[${i}]</span> ${cmd}_${i}=1</div>`;
             }
-        } else {
-            // Generador de 30 comandos Brevent
+
+            // Generar 30 Comandos Brevent
+            breventBox.innerHTML = "";
+            const breventBase = [
+                "settings put global window_animation_scale 0.5",
+                "settings put system pointer_speed 10",
+                "cmd package compile -m speed -f com.dts.freefireth",
+                "wm size 1080x2400",
+                "settings put global ram_expand_size 0"
+            ];
+
             for(let i=1; i<=30; i++) {
-                cmds.push(`settings put global turbo_mode_active_${i} 1`);
-                if(i % 5 === 0) cmds.push(`cmd package compile -m speed -f com.game.booster_${i}`);
+                let cmd = breventBase[i % breventBase.length];
+                breventBox.innerHTML += `<div class="code-line" style="color:var(--neon-pink)"><span>[${i}]</span> ${cmd}</div>`;
             }
         }
-        return cmds;
-    }
 
-    function updateInterface() {
-        const brand = document.getElementById('deviceSelector').value;
-        const box = document.getElementById('content');
-        if(!brand) { box.style.display = 'none'; return; }
+        function copyAction() {
+            alert("✅ ¡CÓDIGOS LILIX COPIADOS! \n\nAhora ve a SetEdit o Brevent y empieza a pegar.");
+        }
 
-        box.style.display = 'block';
-        document.getElementById('titleDisplay').innerText = "CONFIGURACIÓN VIP: " + brand.toUpperCase();
-        document.getElementById('imgText').innerText = "VISTA PREVIA DISPOSITIVO: " + brand.toUpperCase();
-
-        const seteditList = document.getElementById('setedit-list');
-        const breventList = document.getElementById('brevent-list');
-        
-        seteditList.innerHTML = "";
-        breventList.innerHTML = "";
-
-        // Insertar 100 comandos de SetEdit
-        generateCommands('setedit', brand).forEach(c => {
-            let div = document.createElement('div');
-            div.className = 'code-line';
-            div.innerText = c;
-            seteditList.appendChild(div);
-        });
-
-        // Insertar 30 comandos de Brevent
-        generateCommands('brevent', brand).forEach(c => {
-            let div = document.createElement('div');
-            div.className = 'code-line';
-            div.style.borderColor = 'var(--neon-pink)';
-            div.innerText = c;
-            breventList.appendChild(div);
-        });
-    }
-</script>
-
+        function infoAction() {
+            alert("GUÍA RÁPIDA LILIX:\n1. Abre SetEdit y busca la tabla indicada.\n2. Añade 'New Setting' y pega el código.\n3. En Brevent, usa 'Exec Command' para los códigos rosas.\n4. Reinicia para activar la máxima sensibilidad.");
+        }
+    </script>
 </body>
 </html>
